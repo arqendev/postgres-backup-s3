@@ -47,6 +47,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:${{ matrix.postgres }}
           build-args: |
             ALPINE_VERSION=${{ matrix.alpine }}
+            POSTGRES_VERSION=${{ matrix.postgres }}
           platforms: |
             linux/amd64
             linux/arm64

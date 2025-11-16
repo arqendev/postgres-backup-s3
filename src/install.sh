@@ -5,8 +5,19 @@ set -o pipefail
 
 apk update
 
-# install pg_dump
-apk add postgresql-client
+# install pg_dump from official PostgreSQL repository for version 17+
+# Alpine repos only have up to PostgreSQL 16, so use PostgreSQL's official APK repo for newer versions
+if [ "${POSTGRES_VERSION}" -ge 17 ] 2>/dev/null; then
+    echo "Installing PostgreSQL ${POSTGRES_VERSION} client from official repository..."
+
+    # Add PostgreSQL official repository
+    apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main \
+        "postgresql${POSTGRES_VERSION}-client"
+else
+    echo "Installing PostgreSQL client from Alpine repository..."
+    # For PostgreSQL 12-16, use Alpine's built-in repos
+    apk add postgresql-client
+fi
 
 # install gpg
 apk add gnupg
