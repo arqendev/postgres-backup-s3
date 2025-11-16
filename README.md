@@ -17,7 +17,7 @@ services:
       POSTGRES_PASSWORD: password
 
   backup:
-    image: arqendev/postgres-backup-s3:16
+    image: ghcr.io/arqendev/postgres-backup-s3:16
     environment:
       SCHEDULE: '@weekly'     # optional
       BACKUP_KEEP_DAYS: 7     # optional
@@ -46,7 +46,7 @@ For Rails apps deployed with Kamal, add this accessory to your `config/deploy.ym
 ```yaml
 accessories:
   postgres-backup:
-    image: arqendev/postgres-backup-s3:17
+    image: ghcr.io/arqendev/postgres-backup-s3:17
     host: your-server-ip
     env:
       clear:
